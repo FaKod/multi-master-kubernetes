@@ -66,6 +66,13 @@
        protocol: tcp
 
 # Rules for the worker nodes
+  - name: worker to worker exoip
+    local_action:
+     module: cs_securitygroup_rule
+     security_group: "{{ worker_security_group_name }}"
+     user_security_group: "{{ worker_security_group_name }}"
+     start_port: 12345
+     end_port: 12345
   - name: public to worker ssh
     local_action:
      module: cs_securitygroup_rule
