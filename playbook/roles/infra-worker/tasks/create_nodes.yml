@@ -24,6 +24,7 @@
   - add_host:
       groups: worker_nodes
       name: "{{ item.display_name }}"
+      worker_eip: "{{ worker_eip }}"
       ansible_host: "{{ item.default_ip }}"
       ansible_user: core
       ansible_ssh_private_key_file: "../secret/id_rsa_{{ ssh_key }}"
