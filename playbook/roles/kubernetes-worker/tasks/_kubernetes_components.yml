@@ -1,30 +1,9 @@
 - set_fact:
     master_eip: "{{ hostvars[groups['master_nodes'][0]]['master_eip'] }}"
-    worker_eip: "{{ hostvars[groups['worker_nodes'][0]]['worker_eip'] }}"
-    EXO_API_ENDPOINT: "{{ lookup('ini', 'endpoint section=cloudstack file=/secret/cloudstack.ini') }}"
-    EXO_API_KEY: "{{ lookup('ini', 'key section=cloudstack file=/secret/cloudstack.ini') }}"
-    EXO_API_SECRET: "{{ lookup('ini', 'secret section=cloudstack file=/secret/cloudstack.ini') }}"
-
 
 - file:
     path: /etc/kubernetes/manifests
     state: directory
-    mode: 0644
-
-- template:
-    src: templates/eip.network.j2
-    dest: /etc/systemd/network/eip.network
-    owner: root
-    group: root
-    mode: 0644
-
-- command: systemctl restart systemd-networkd
-
-- template:
-    src: templates/exoip.j2
-    dest: /etc/kubernetes/manifests/exoip.yaml
-    owner: root
-    group: root
     mode: 0644
 
 - template:
